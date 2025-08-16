@@ -63,33 +63,32 @@ export default function Footer() {
     <footer className='w-full h-auto bg-[#1172B2] text-white'>
       <ClientsLayout>
           
-        <div className='grid grid-cols-4 py-6 gap-6 w-full h-full'>
+        <div className='grid md:grid-cols-4 py-6 gap-6 w-full h-full overflow-hidden'>
 
-          <div className='col-span-2 flex flex-col gap-4'>
+          <div className='md:col-span-2 col-span-1 flex flex-col gap-4'>
             <h1 className='text-[24px] font-bold italic'>Ananto</h1>
-            <h3 className='text-'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, vitae ullam. Quia dolorem ad, fugiat cupiditate omnis quod facilis at accusantium, doloribus beatae adipisci eius labore. Tenetur dolorem non deleniti.</h3>
+            <h3 className='text-xs md:text-sm'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, vitae ullam. Quia dolorem ad, fugiat cupiditate omnis quod facilis at accusantium, doloribus beatae adipisci eius labore. Tenetur dolorem non deleniti.</h3>
           </div>
 
           <div className='h-full flex flex-col gap-4'>
-            <h1 className='text-xl font-semibold'>Get In Touch</h1>
+            <h1 className='md:text-xl font-semibold'>Get In Touch</h1>
             
             {
               Socials.map((item, index) => (
                 <a href={item.href}>
-                  <h3 key={index} className='hover:scale-105 transition duration-300 ease-in-out'>{item.name}</h3>
+                  <h3 key={index} className='hover:scale-105 text-sm md:text-base transition duration-300 ease-in-out'>{item.name}</h3>
                 </a>
               ))
             }
-
           </div>
 
           <div className='h-full flex flex-col gap-4'>
-            <h1 className='text-xl font-semibold'>Contact Info</h1>
+            <h1 className='md:text-xl font-semibold'>Contact Info</h1>
             
             {
               contact.map((item, index) => (
                 <a href={item.href}>
-                  <div key={index} className='flex gap-2 transition duration-300 ease-in-out hover:scale-105'>
+                  <div key={index} className='flex gap-2 transition text-sm md:text-base duration-300 ease-in-out hover:scale-105'>
                     {item.icon}
                     <h3>{item.content}</h3>
                   </div>
