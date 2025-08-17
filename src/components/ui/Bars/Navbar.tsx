@@ -1,6 +1,7 @@
 import React from 'react'
 import NButton from '../Buttons/NButton'
 import ClientsLayout from '@/layouts/ClientsLayout'
+import MobileSideBar from './MobileSideBar'
 
 
 export default function Navbar() {
@@ -34,17 +35,16 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className='w-full h-[86px]'>
+    <nav className='w-full h-[86px] shadow-lg sticky top-0 z-50 bg-white'>
       <ClientsLayout>
+
         {/* Mobile */}
-        {/* <div></div> */}
+        <MobileSideBar />
 
         {/* From Xl */}
         <section className='hidden md:flex w-full h-full justify-between items-center'>
 
-          <div>
-            <h1 className='text-[24px] font-bold italic'>Ananto</h1>
-          </div>
+          <h1 className='text-[24px] font-bold italic'>Ananto</h1>
 
           <div className='flex w-auto h-full justify-between items-center gap-2 lg:gap-4 xl:gap-6'>
             {
