@@ -34,7 +34,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className='w-full h-[86px] bg-[#00000018]'>
+    <nav className='w-full h-[86px]'>
       <ClientsLayout>
         {/* Mobile */}
         {/* <div></div> */}
