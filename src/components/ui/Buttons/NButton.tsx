@@ -23,7 +23,7 @@ export default function NButton({
       href={href}
       className={`
         px-4 py-2 
-        transition duration-500 ease-in-out 
+        transition duration-100 ease-in-out 
         flex justify-center items-center 
         text-[16px] font-medium cursor-pointer
         ${
