@@ -1,11 +1,12 @@
 import HeroSection from '@/components/ui/section/HeroSection'
-import ClientsLayout from '@/layouts/ClientsLayout'
+import SkillsSections from '@/components/ui/section/SkillsSections'
 import React from 'react'
 
 export default function HomePage() {
   return (
     <div>
       <HeroSection />
+      <SkillsSections />
     </div>
   )
 }
