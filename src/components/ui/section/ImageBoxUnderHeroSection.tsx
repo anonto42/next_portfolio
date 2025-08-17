@@ -14,6 +14,7 @@ export default function ImageBoxUnderHeroSection() {
                 alt="User profile picture"
                 src={"/profileImage.jpg"} 
                 blurDataURL='/images/Profile2.webp'
+                className='object-cover'
             /> 
 
             <HeroImageButton 
