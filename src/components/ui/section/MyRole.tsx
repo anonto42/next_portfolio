@@ -27,7 +27,7 @@ export default function MyRole() {
                     <div className='w-1/2 h-auto flex flex-col items-center justify-center mx-auto gap-1'>
                         {
                             conditions.map((condition, index) => (
-                                <div key={index} className='w-full h-auto flex items-center md:justify-start justify-center md:pl-16'>
+                                <div key={index} className='w-full h-auto flex items-center justify-start md:pl-16'>
                                     <IoCheckmarkDoneCircleSharp className='text-[#11b21e] text-2xl mr-2' />
                                     <h1 className='text-xl tracking-wide text-shadow-lg'>{condition}</h1>
                                 </div>
@@ -35,7 +35,7 @@ export default function MyRole() {
                         }
                     </div>
 
-                    <div className='md:w-[400px] max-w-[400px] mx-auto mt-6 md:mt-0 h-[400px] bg-[#1172B2] rounded-tl-4xl rounded-br-4xl overflow-hidden relative shadow-[0_0px_10px_rgba(0,0,0,0.2)]'>
+                    <div className='md:w-[340px] max-w-[340px] mx-auto mt-6 md:mt-0 h-[340px] bg-[#1172B2] rounded-tl-4xl rounded-br-4xl overflow-hidden relative shadow-[0_0px_10px_rgba(0,0,0,0.2)]'>
                         <Image src="/skills_images/first.png" alt="" fill className='object-cover' />
                     </div>
                 </div>

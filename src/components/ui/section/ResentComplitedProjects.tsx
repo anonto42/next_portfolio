@@ -26,7 +26,7 @@ export default function ResentComplitedProjects() {
   return (
     <div className='text-center w-full h-auto pb-[90px]'>
         <ClientsLayout>
-            <h1 className='text-3xl font-bold tracking-wide mb-9 text-shadow-lg'>{header}</h1>
+            <h1 className='md:text-3xl text-[24px] mb-5 md:mb-9 font-bold tracking-wide text-shadow-lg'>{header}</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full sm:w-[600px] md:w-[550px] lg:w-[820px] mx-auto'>
                 {
                     projects.map((project, index) => (

@@ -100,7 +100,7 @@ export default function Footer() {
         </div>
 
       </ClientsLayout>
-      <div className='bg-[#1172B2] h-[40px] border-t-2 px-3 xl:px-0 flex justify-center items-center'>
+      <div className='bg-[#1172B2] border-t-2 px-3 xl:px-0 flex justify-center items-center py-5'>
         <h3 className='text-[14px]'>&copy; 2025 and all right service</h3>
       </div>
     </footer>

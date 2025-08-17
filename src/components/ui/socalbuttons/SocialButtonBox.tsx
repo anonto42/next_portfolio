@@ -10,7 +10,7 @@ export default function SocialButtonBox({
     }[]
 }>) {
   return (
-    <div className=' flex gap-2 mt-5 items-center justify-start'>
+    <div className='flex gap-1 md:gap-2 mt-5 items-center justify-start mb-4 md:mb-0'>
 
         <button className="bg-[rgba(255,255,255,0.19)] 
         border border-[rgba(255,255,255,0.64)] 
