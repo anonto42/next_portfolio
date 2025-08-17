@@ -9,6 +9,7 @@ import AboutSectionUnderHeroSection from './AboutSectionUnderHeroSection';
 import ImageBoxUnderHeroSection from './ImageBoxUnderHeroSection';
 
 export default function HeroSection() {
+
     const name = "MD Kamrul Hasan";
     const profation = "Web Developer";
     const shortDescription = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, cumque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, cumque.";
@@ -42,7 +43,7 @@ export default function HeroSection() {
       ]
 
   return (   
-    <div className='w-full min-h-[400px] bg-gradient-to-r from-[#187CBF] to-[#BBD9ED] text-white'>
+    <div className='w-full md:h-[450px] py-6 md:py-0 bg-gradient-to-r from-[#187CBF] to-[#BBD9ED] text-white'>
         <ClientsLayout>
             <div className='w-full h-full flex items-center justify-center'>
                 <div className='md:grid-cols-2 grid grid-cols-1 gap-5 items-center'>
