@@ -10,7 +10,7 @@ export default function SkillsSections() {
   return (
     <div className='w-full h-auto text-center py-[90px]'>
       <ClientsLayout>
-        <h1 className='text-3xl font-bold tracking-wide'>{header}</h1>
+        <h1 className='text-3xl font-bold tracking-wide text-shadow-lg'>{header}</h1>
         <p className='text-base text-[#474747da] w-1/2 mx-auto'>{subHeader}</p>
 
         <div className='w-full h-auto flex items-center justify-center mt-10'>
