@@ -15,7 +15,7 @@ export default function ProjectCard(
     }
 ) {
   return (
-    <div key={index} className='w-[250px] h-[350px] flex flex-col items-center mx-auto bg-gray-100 rounded-xl shadow-[0_0px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_0px_10px_rgba(0,0,0,0.2)] cursor-pointer transition-transform duration-200 hover:scale-[1.01] pb-3'>
+    <div key={index} className='w-[250px] h-[350px] flex flex-col items-center mx-auto bg-gray-50 rounded-xl shadow-[0_0px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_0px_10px_rgba(0,0,0,0.2)] cursor-pointer transition-transform duration-200 hover:scale-[1.01] pb-3'>
         <div className='w-[230px] h-[230px] rounded-xl bg-[#323232] relative mt-3 overflow-hidden'>
             <Image src={image} alt={name} fill className='object-cover' />
         </div>
