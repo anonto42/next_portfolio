@@ -20,13 +20,13 @@ export default function ImageBoxUnderHeroSection() {
             <HeroImageButton 
                 text="20+ completed projects" 
                 position="right-0 top-0" 
-                border='border-b border-l rounded-bl-xl' 
+                border='rounded-bl-xl' 
             />
 
             <HeroImageButton 
                 text="2 years experience" 
                 position="left-0 bottom-0" 
-                border='border-t border-r rounded-tr-xl' 
+                border='rounded-tr-xl' 
             />
 
         </div>

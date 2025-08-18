@@ -12,8 +12,9 @@ export default function HeroImageButton({
   return (
     <div className={`absolute ${position} h-[50px] w-1/2 z-10
                   bg-[rgba(255,255,255,0.10)] 
-                    ${border} border-[rgba(255,255,255,0.64)] 
+                    ${border}
                     shadow-[0_4px_30px_rgba(0,0,0,0.1)] 
+                    inset-shadow-[0_0px_5px_rgba(255,255,255,1)]
                     backdrop-blur-[8.3px] 
                     flex items-center justify-center 
                     cursor-pointer
