@@ -1,17 +1,20 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function ProjectCard(
     {
         name,
         image,
         description,
-        index
+        index,
+        id = "This_is_a_test_id"
     }: {
         name: string,
         image: string,
         description: string,
-        index: number
+        index: number,
+        id?: string
     }
 ) {
   return (
@@ -21,7 +24,9 @@ export default function ProjectCard(
         </div>
         <h2 className='text-xl font-medium mt-2'>{name}</h2>
         <p className='text-sm text-gray-500 overflow-hidden'>{description}</p>
-        <button className='hover:bg-[#1172B2] border border-[#1172B2] text-[#1172B2] hover:text-white px-4 py-2 rounded-full mt-2 hover:scale-105 transition-transform duration-300 cursor-pointer'>View Project</button>
+        <Link href={`/blog/${id}`}>
+            <button className='hover:bg-[#1172B2] border border-[#1172B2] text-[#1172B2] hover:text-white px-4 py-2 rounded-full mt-2 hover:scale-105 transition-transform duration-300 cursor-pointer'>View Project</button>
+        </Link>
     </div>
   )
 }
