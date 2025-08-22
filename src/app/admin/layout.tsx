@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Admin DashBoard",
-  description: "",
+  title: "Admin DashBoard For Portfolio",
+  description: "Sohidul Islam Ananto Portfolio Admin DashBoard web development",
 };
 
 export default function RootLayout({
