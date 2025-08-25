@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function AuthCard() {
@@ -6,6 +7,7 @@ export default function AuthCard() {
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const validateInputs = (): boolean => {
     const newErrors: string[] = [];
@@ -43,6 +45,9 @@ export default function AuthCard() {
       setEmail("");
       setPassword("");
       setErrors([]);
+
+      router.push("/admin/home");
+
     } catch (err) {
       console.error(err);
       setErrors(["Something went wrong. Please try again."]);
