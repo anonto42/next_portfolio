@@ -35,7 +35,7 @@ export default function AdminMainBar() {
         },
         {
             name: "Logout",
-            href: "/admin/tab/logout",
+            href: "/",
             icon: <LuLogOut size={22} />
         }
     ]
