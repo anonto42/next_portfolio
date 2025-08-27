@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import AdminMainBar from "@/components/ui/Bars/AdminMainBar";
 
 const poppinsFonds = Poppins({
   variable: "--font-poppins",
@@ -24,12 +23,7 @@ export default function RootLayout({
       <body
         className={`${poppinsFonds.variable} ${poppinsFonds.variable} antialiased`}
       >
-        <div className="w-full h-full relative">
-          <div className="pt-[80px] pl-[150px]">
-            {children}
-          </div>
-          <AdminMainBar />
-        </div>
+        {children}
       </body>
     </html>
   );
