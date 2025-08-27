@@ -1,10 +1,12 @@
 import AuthCard from '@/components/auth/AuthCard'
 import React from 'react'
 
-export default function Dashboard() {
+function AuthPage() {
   return (
-    <div className='w-full h-screen flex justify-center items-center'>
+    <div className='w-full h-svh flex items-center justify-center bg-[#232323]'>
       <AuthCard />
     </div>
   )
 }
+
+export default AuthPage

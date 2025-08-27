@@ -46,7 +46,7 @@ export default function AuthCard() {
       setPassword("");
       setErrors([]);
 
-      router.push("/admin/home");
+      router.push("/admin/overview");
 
     } catch (err) {
       console.error(err);

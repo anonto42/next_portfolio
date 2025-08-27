@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import React from 'react'
 import { FaRegNewspaper } from 'react-icons/fa6'
-import { IoHomeOutline } from 'react-icons/io5'
 import { LuFolderCode, LuLogOut } from 'react-icons/lu'
 import { MdOutlineContacts, MdOutlineDashboard } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
@@ -14,28 +13,23 @@ export default function AdminMainBar() {
 
     const menu = [
         {
-            name: "Dashboard",
-            href: "/admin/tab/dashboard",
+            name: "Overview",
+            href: "/admin/overview",
             icon: <MdOutlineDashboard size={22} />
         },
         {
-            name: "Home",
-            href: "/admin/tab/home",
-            icon: <IoHomeOutline size={22} />
-        },
-        {
-            name: "Portfolio",
-            href: "/admin/tab/portfolio",
+            name: "About",
+            href: "/admin/about",
             icon: <LuFolderCode size={21} />
         },
         {
-            name: "Blog Page",
-            href: "/admin/tab/blog",
+            name: "Projects",
+            href: "/admin/project",
             icon: <FaRegNewspaper size={20} />
         },
         {
             name: "Contact",
-            href: "/admin/tab/contact",
+            href: "/admin/contact",
             icon: <MdOutlineContacts size={22} />
         },
         {
@@ -46,7 +40,7 @@ export default function AdminMainBar() {
     ]
 
   return (
-    <div className='w-full h-svh relative'>
+    <div className='w-full h-svh absolute top-0 left-0 '>
 
         <div className='w-full h-[80px] absolute bg-[#2c344b] z-10' />
 
