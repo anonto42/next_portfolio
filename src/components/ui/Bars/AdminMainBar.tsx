@@ -5,11 +5,12 @@ import { FaRegNewspaper } from 'react-icons/fa6'
 import { IoHomeOutline } from 'react-icons/io5'
 import { LuFolderCode, LuLogOut } from 'react-icons/lu'
 import { MdOutlineContacts, MdOutlineDashboard } from 'react-icons/md'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function AdminMainBar() {
 
-    const [tab, setTab] = useState("Dashboard")
+    const pathname = usePathname(); 
+
 
     const menu = [
         {
@@ -60,8 +61,8 @@ export default function AdminMainBar() {
         <div className='w-[140px] h-svh absolute bg-[#2c344b] shadow-[0_0px_10px_rgba(0,0,0,0.2)] px-5 pt-[80px]'>
              {
                 menu.map((item, index) => (
-                    <Link href={item.href} key={index}  onClick={() => setTab(item.name)} > 
-                        <div className={`w-full h-[80px] flex items-center justify-center cursor-pointer active:scale-105 transition duration-300 ease-in-out ${tab === item.name ? "text-[#4371fa]" : ""}`}>
+                    <Link href={item.href} key={index} > 
+                        <div className={`w-full h-[80px] flex items-center justify-center cursor-pointer active:scale-105 active:text-[#5e86ff] transition duration-300 ease-in-out ${ pathname === item.href ? "text-[#4371fa]" : ""}`}>
                             <div className='w-full h-full flex items-center justify-between'>
                                 {item.icon}
                                 <h1 className='text-[12px] w-[80%] pl-2 font-bold italic text-shadow-2xs cursor-pointer active:scale-105 transition duration-300 ease-in-out text-start'>{item.name}</h1>
