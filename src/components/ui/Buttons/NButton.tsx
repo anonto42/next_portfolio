@@ -26,6 +26,10 @@ export default function NButton({
         transition duration-100 ease-in-out 
         flex justify-center items-center 
         text-[16px] font-medium cursor-pointer
+        active:scale-105
+        active:shadow-md
+        active:bg-[#1172B2]
+        active:text-white
         ${
           isActive ? 
           "bg-[#1172B2] text-white scale-105 shadow-md" : 
