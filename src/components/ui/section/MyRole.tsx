@@ -22,7 +22,7 @@ export default function MyRole() {
             <div className='w-full h-auto flex flex-col items-center justify-center'>
                 <h1 className='text-3xl font-bold tracking-wide text-shadow-lg text-center'>My Role</h1>
 
-                <div className='w-full h-auto md:flex items-center md:justify-around justify-center mt-9 md:mt-[80px] md:px-[100px]'>
+                <div className='w-full xl:w-[80%] h-auto md:flex items-center md:justify-around justify-center mt-9 md:mt-[80px] md:px-[100px]'>
 
                     <div className='w-1/2 h-auto flex flex-col items-center justify-center mx-auto gap-1'>
                         {

@@ -51,7 +51,7 @@ export default function HeroSection() {
     >
         <ClientsLayout>
             <div className='w-full h-full flex items-center justify-center'>
-                <div className='md:grid-cols-2 grid grid-cols-1 gap-5 items-center'>
+                <div className='md:grid-cols-2 grid grid-cols-1 gap-5 items-center xl:pl-[150px] bg-gray-'>
 
                     <AboutSectionUnderHeroSection
                         name={name}
