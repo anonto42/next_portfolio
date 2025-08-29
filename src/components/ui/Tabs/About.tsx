@@ -1,6 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageUploader from "./Image";
+import { updateHomeContact, updateHomeDescription, updateHomeEmail, updateHomeFacebook, updateHomeFirstHeading, updateHomeLastSection, updateHomeLinkedin, updateHomeSecondHeading, updateHomeSkillsDescription, updateHomeSkillsHeader, updateHomeVideoSectionHeader, updateHomeWhatsapp } from "@/funcs/create.server.func";
+import { getHomePageData } from "@/funcs/get.server.func";
 
 interface Skill {
   id: number;
@@ -50,11 +52,9 @@ export default function About() {
     reader.readAsDataURL(file);
   };
 
-  // 🔹 Video Section
   const [videoHeader, setVideoHeader] = useState("");
   const [videoFile, setVideoFile] = useState<File | null>(null);
 
-  // 🔹 Last Section
   const [lastHeader, setLastHeader] = useState("");
   const [string, setString] = useState("");
   const [lastArray, setLastArray] = useState<string[]>([
@@ -74,6 +74,40 @@ export default function About() {
     setLastArray((prev) => prev.filter((_, i) => i !== index));
   };
 
+  useEffect(()=>{
+    getHomePageData()
+    .then( ({HeroSection, links, videoSection, skills, lastSection}) => {
+        
+        setFirstHeader(HeroSection.firstHeader)
+        setSecondHeader(HeroSection.secondHeader)
+        setDescription(HeroSection.discription)
+
+        setFacebook(links.facebook)
+        setLinkedin(links.linkedin)
+        setEmail(links.email)
+        setWhatsapp(links.whatsapp)
+        setContact(links.contact)
+
+        setSkillsHeader(skills.title)
+        setSkillsAbout(skills.description)
+
+        /*
+        {
+                div1: resuald.skill1,
+                div2: resuald.skill2,
+                div3: resuald.skill3,
+                div4: resuald.skill4
+            }
+        */
+
+        setVideoHeader(videoSection.title)
+        // Main video also weating for hear
+
+        setLastHeader(lastSection.title)
+        // Have to work for the points
+    })
+  },[])
+
   return (
     <div className="w-full h-full">
 
@@ -91,6 +125,10 @@ export default function About() {
             placeholder="First Header"
             className="w-full h-auto p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
             />
+            <button
+                onClick={()=>updateHomeFirstHeading(firstHeader)} 
+                className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
         </div>
 
         {/* Second Header */}
@@ -105,6 +143,10 @@ export default function About() {
             placeholder="Second Header"
             className="w-full h-auto p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
             />
+            <button
+                onClick={()=>updateHomeSecondHeading(secondHeader)} 
+                className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
         </div>
 
         {/* Description */}
@@ -118,6 +160,10 @@ export default function About() {
             placeholder="Description"
             className="w-full h-auto p-2 min-h-[100px] max-h-[300px] rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
             />
+            <button
+                onClick={()=>updateHomeDescription(description)} 
+                className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
         </div>
 
         {/* Image Uploader */}
@@ -126,85 +172,113 @@ export default function About() {
         </div>
 
         {/* Social Links */}
-        <div className="md:w-[40%] w-[90%] h-auto max-h-[550px] flex flex-col items-start justify-start p-2 rounded-sm shadow-md text-[#00111d] bg-white">
+        <div className="md:w-[40%] w-[90%] h-auto max-h-[700px] flex flex-col items-start justify-start p-2 rounded-sm shadow-md text-[#00111d] bg-white">
             <h2 className="text-sm font-bold border-b border-[#00111d]">
             Social links:
             </h2>
             <div className="p-2 w-full">
-            <h3>Facebook:</h3>
-            <input
-                type="text"
-                value={facebook}
-                onChange={(e) => setFacebook(e.target.value)}
-                placeholder="Facebook"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <h3>Facebook:</h3>
+                <input
+                    type="text"
+                    value={facebook}
+                    onChange={(e) => setFacebook(e.target.value)}
+                    placeholder="Facebook"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=> updateHomeFacebook(facebook)}
+                    className="text-xs border px-3 py-1 my-2 rounded-sm active:scale-95 duration-100 cursor-pointer"
+                >Update</button>
             </div>
             <div className="p-2 w-full">
             <h3>Linkedin:</h3>
-            <input
-                type="text"
-                value={linkedin}
-                onChange={(e) => setLinkedin(e.target.value)}
-                placeholder="Linkedin"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <input
+                    type="text"
+                    value={linkedin}
+                    onChange={(e) => setLinkedin(e.target.value)}
+                    placeholder="Linkedin"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=> updateHomeLinkedin(linkedin)}
+                    className="text-xs border px-3 py-1 my-2 rounded-sm active:scale-95 duration-100 cursor-pointer"
+                >Update</button>
             </div>
             <div className="p-2 w-full">
             <h3>WhatsApp:</h3>
-            <input
-                type="text"
-                value={whatsapp}
-                onChange={(e) => setWhatsapp(e.target.value)}
-                placeholder="WhatsApp"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <input
+                    type="text"
+                    value={whatsapp}
+                    onChange={(e) => setWhatsapp(e.target.value)}
+                    placeholder="WhatsApp"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=> updateHomeWhatsapp(whatsapp)}
+                    className="text-xs border px-3 py-1 my-2 rounded-sm active:scale-95 duration-100 cursor-pointer"
+                >Update</button>
             </div>
             <div className="p-2 w-full">
             <h3>Email:</h3>
-            <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=> updateHomeEmail(email)}
+                    className="text-xs border px-3 py-1 my-2 rounded-sm active:scale-95 duration-100 cursor-pointer"
+                >Update</button>
             </div>
             <div className="p-2 w-full">
             <h3>Contact:</h3>
-            <input
-                type="text"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                placeholder="Contact"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <input
+                    type="text"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    placeholder="Contact"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=> updateHomeContact(contact)}
+                    className="text-xs border px-3 py-1 my-2 rounded-sm active:scale-95 duration-100 cursor-pointer"
+                >Update</button>
             </div>
-        </div>
+        </div> 
 
         {/* Skills Section */}
         <div className="md:w-[40%] w-[90%] h-auto flex flex-col items-start justify-start p-2 rounded-sm shadow-md text-[#00111d] bg-white">
             <h2 className="text-sm font-bold border-b border-[#00111d]">Skills:</h2>
 
             <div className="p-2 w-full">
-            <h3>Header:</h3>
-            <input
-                type="text"
-                value={skillsHeader}
-                onChange={(e) => setSkillsHeader(e.target.value)}
-                placeholder="Header"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <h3>Header:</h3>
+                <input
+                    type="text"
+                    value={skillsHeader}
+                    onChange={(e) => setSkillsHeader(e.target.value)}
+                    placeholder="Header"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=>updateHomeSkillsHeader(skillsHeader)} 
+                    className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
             </div>
 
             <div className="p-2 w-full">
             <h3>About:</h3>
-            <textarea
-                value={skillsAbout}
-                onChange={(e) => setSkillsAbout(e.target.value)}
-                placeholder="Short Description"
-                className="w-full min-h-[100px] max-h-[250px] p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <textarea
+                    value={skillsAbout}
+                    onChange={(e) => setSkillsAbout(e.target.value)}
+                    placeholder="Short Description"
+                    className="w-full min-h-[100px] max-h-[250px] p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=>updateHomeSkillsDescription(skillsAbout)} 
+                    className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
             </div>
 
             {/* Skill add form */}
@@ -270,27 +344,31 @@ export default function About() {
         {/* Video Section */}
         <div className="md:w-[40%] w-[90%] h-auto max-h-[550px] flex flex-col items-start justify-start p-2 rounded-sm shadow-md text-[#00111d] bg-white">
             <h2 className="text-sm font-bold border-b border-[#00111d]">
-            Video Section:
+                Video Section:
             </h2>
             <div className="p-2 w-full">
-            <h3>Video header:</h3>
-            <input
-                type="text"
-                value={videoHeader}
-                onChange={(e) => setVideoHeader(e.target.value)}
-                placeholder="Video header"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <h3>Video header:</h3>
+                <input
+                    type="text"
+                    value={videoHeader}
+                    onChange={(e) => setVideoHeader(e.target.value)}
+                    placeholder="Video header"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=>updateHomeVideoSectionHeader(videoHeader)} 
+                    className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
             </div>
             <div className="p-2 w-full">
-            <h3>Video:</h3>
-            <input
-                type="file"
-                onChange={(e) =>
-                setVideoFile(e.target.files ? e.target.files[0] : null)
-                }
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <h3>Video:</h3>
+                <input
+                    type="file"
+                    onChange={(e) =>
+                    setVideoFile(e.target.files ? e.target.files[0] : null)
+                    }
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
             </div>
         </div>
 
@@ -300,14 +378,18 @@ export default function About() {
             Last Section:
             </h2>
             <div className="p-2 w-full">
-            <h3>Header:</h3>
-            <input
-                type="text"
-                value={lastHeader}
-                onChange={(e) => setLastHeader(e.target.value)}
-                placeholder="Header"
-                className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
-            />
+                <h3>Header:</h3>
+                <input
+                    type="text"
+                    value={lastHeader}
+                    onChange={(e) => setLastHeader(e.target.value)}
+                    placeholder="Header"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
+                <button
+                    onClick={()=>updateHomeLastSection(lastHeader)} 
+                    className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
             </div>
             <div className="p-2 w-full">
             <h3>Points:</h3>
