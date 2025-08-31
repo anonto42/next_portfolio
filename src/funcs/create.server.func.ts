@@ -194,7 +194,132 @@ export const updateHomeSkillsDescription = async ( description: string ) => {
     }
 }
 
-//Have to impliment the 4 skills sections
+export const updateHomeYearsOfExperiyances = async ( amount: string ) => {
+    try {
+
+        const resuald:TOverAllData | null = await OverAllData.findOne({});
+        
+        if (!resuald) {
+            await OverAllData.create({});
+            return "Document created on the database"
+        }
+
+        resuald.yearsOfExpriyeans = amount;
+        await resuald.save()
+        
+    } catch (error: any) {
+        console.log(error)
+        return error.message
+    }
+}
+
+export const updateHomeComplitedProjects = async ( amount: string ) => {
+    try {
+
+        const resuald:TOverAllData | null = await OverAllData.findOne({});
+        
+        if (!resuald) {
+            await OverAllData.create({});
+            return "Document created on the database"
+        }
+
+        resuald.projects = amount;
+        await resuald.save()
+        
+    } catch (error: any) {
+        console.log(error)
+        return error.message
+    }
+}
+
+export const updateHomeSectionImage = async ( url: string ) => {
+    try {
+
+        const resuald:TOverAllData | null = await OverAllData.findOne({});
+        
+        if (!resuald) {
+            await OverAllData.create({});
+            return "Document created on the database"
+        }
+
+        resuald.homeHeadingImage = url;
+        await resuald.save()
+        
+    } catch (error: any) {
+        console.log(error)
+        return error.message
+    }
+}
+
+export const updateSkillHeadingWithNumber = async ( payload: string, number: 1 | 2 | 3 | 4 ) => {
+    try {
+
+        const resuald:TOverAllData | null = await OverAllData.findOne({});
+        
+        if (!resuald) {
+            await OverAllData.create({});
+            return "Document created on the database"
+        }
+        console.log("Comes hear")
+
+        switch( number ){
+            case 1:
+                resuald.skill1.title = payload;
+                console.log("action on hear")
+                break;
+            case 2:
+                resuald.skill2.title = payload;
+                break;
+            case 3:
+                resuald.skill3.title = payload;
+                break;
+            case 4:
+                resuald.skill4.title = payload;
+                break;
+        }
+
+        await resuald.save()
+        console.log("saved hear")
+        
+    } catch (error: any) {
+        console.log(error)
+        return error.message
+    }
+}
+
+export const updateSkillImage = async ( payload: string, number: 1 | 2 | 3 | 4 ) => {
+    try {
+
+        const resuald:TOverAllData | null = await OverAllData.findOne({});
+        
+        if (!resuald) {
+            await OverAllData.create({});
+            return "Document created on the database"
+        }
+
+        switch( number ){
+            case 1:
+                resuald.skill1.image = payload;
+                break;
+            case 2:
+                resuald.skill2.image = payload;
+                break;
+            case 3:
+                resuald.skill3.image = payload;
+                break;
+            case 4:
+                resuald.skill4.image = payload;
+                break;
+        }
+
+        await resuald.save()
+        
+    } catch (error: any) {
+        console.log(error)
+        return error.message
+    }
+}
+
 
 export const updateHomeVideoSectionHeader = async ( title: string ) => {
     try {

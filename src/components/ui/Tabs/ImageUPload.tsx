@@ -1,20 +1,21 @@
-"use client";
-import { updateHomeSectionImage } from "@/funcs/create.server.func";
+import { updateSkillImage } from "@/funcs/create.server.func";
 import Image from "next/image";
 import React, { useState } from "react";
 
-interface ImageUploaderProps {
+interface SkillImageUploaderProps {
   width?: number;
   height?: number;
-  previewImage: string
+  skillImage: string;
+  skillNumber: 1 | 2 | 3 | 4; // For determining which skill section to update
 }
 
-export default function ImageUploader({
+export default function SkillImageUploader({
   width = 300,
   height = 300,
-  previewImage
-}: ImageUploaderProps) {
-  const [preview, setPreview] = useState<string | null>(previewImage);
+  skillImage,
+  skillNumber,
+}: SkillImageUploaderProps) {
+  const [preview, setPreview] = useState<string | null>(skillImage);
   const [loading, setLoading] = useState(false);
 
   // Handle file selection
@@ -28,7 +29,6 @@ export default function ImageUploader({
     img.src = URL.createObjectURL(file);
 
     img.onload = async () => {
-        
       const canvas = document.createElement("canvas");
       canvas.width = width;
       canvas.height = height;
@@ -37,15 +37,15 @@ export default function ImageUploader({
 
       ctx.drawImage(img, 0, 0, width, height);
 
-      // Convert to WebP
+      // Convert to WebP format
       const webpDataUrl = canvas.toDataURL("image/webp", 0.9);
-      setPreview(webpDataUrl); // show preview
+      setPreview(webpDataUrl); // Show preview
 
       // Convert DataURL -> Blob
       const res = await fetch(webpDataUrl);
       const blob = await res.blob();
 
-      // Upload
+      // Upload image to the server
       handleUpload(blob);
     };
   };
@@ -65,11 +65,9 @@ export default function ImageUploader({
       if (!res.ok) throw new Error("Upload failed");
 
       const data = await res.json();
-      
-      await updateHomeSectionImage(data.fileUrl)
-
+      // After the image is uploaded, update the skill section with the new image URL
+      await updateSkillImage(data.fileUrl, skillNumber);
       alert("Upload success!");
-      
     } catch (err) {
       console.error(err);
       alert("Upload failed!");
@@ -87,19 +85,18 @@ export default function ImageUploader({
         className="mb-2 w-full p-4"
       />
 
-      {/* {preview && ( */}
-        <div className="w-full h-[250px] border rounded overflow-hidden relative">
-          <Image 
-            fill={true}
-            quality={100}
-            priority
-            placeholder="blur"
-            alt="User profile picture"
-            src={previewImage}
-            blurDataURL="/images/Profile2.webp"
-            className="object-cover" />
-        </div>
-      {/* )} */}
+      <div className="w-full h-[250px] border rounded overflow-hidden relative">
+        <Image
+          fill={true}
+          quality={100}
+          priority
+          placeholder="blur"
+          alt="Skill section image"
+          src={preview || "/images/default-image.webp"} // Default image if no preview
+          blurDataURL="/images/default-image.webp"
+          className="object-cover"
+        />
+      </div>
 
       {loading && <p className="text-blue-500">Uploading...</p>}
     </div>

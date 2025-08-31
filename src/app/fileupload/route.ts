@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import path from "path";
+import fs from "fs";
+import sharp from "sharp"; 
 
 export async function POST(req: Request) {
   try {
@@ -12,22 +15,22 @@ export async function POST(req: Request) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    const result = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          {
-            folder: "newPorthfolio",
-            format: "webp",
-          },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        )
-        .end(buffer);
-    });
+    const uploadDir = path.join(process.cwd(), "public", "uploads");
 
-    return NextResponse.json(result);
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    const fileName = `${Date.now()}_${file.name.split('.')[0]}.webp`;
+    const filePath = path.join(uploadDir, fileName);
+
+    await sharp(buffer)
+      .webp()
+      .toFile(filePath);
+
+    const fileUrl = `/uploads/${fileName}`;
+
+    return NextResponse.json({ message: "File uploaded and converted successfully", fileUrl });
   } catch (err: any) {
     console.error("Upload failed:", err);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });

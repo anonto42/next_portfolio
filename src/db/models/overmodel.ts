@@ -7,6 +7,7 @@ export interface TOverAllData extends Document {
     homeHeadingDescription:string
     homeHeadingImage:string,
     yearsOfExpriyeans:string,
+    projects: string,
     facebook:string,
     linkedin:string
     whatsapp:string,
@@ -70,6 +71,10 @@ const overDataSchema = new Schema<TOverAllData>(
         type: String,
         default: ""
     },
+    projects:{
+        type: String,
+        default: ""
+    },
     homeSecondHeader:{
         type: String,
         default: ""
@@ -84,7 +89,7 @@ const overDataSchema = new Schema<TOverAllData>(
     },
     yearsOfExpriyeans:{
         type: String,
-        default: "2+ years of expeariyance"
+        default: "2"
     },
     facebook:{
         type: String,

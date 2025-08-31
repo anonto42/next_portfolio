@@ -1,8 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ImageUploader from "./Image";
-import { updateHomeContact, updateHomeDescription, updateHomeEmail, updateHomeFacebook, updateHomeFirstHeading, updateHomeLastSection, updateHomeLinkedin, updateHomeSecondHeading, updateHomeSkillsDescription, updateHomeSkillsHeader, updateHomeVideoSectionHeader, updateHomeWhatsapp } from "@/funcs/create.server.func";
+import { updateHomeComplitedProjects, updateHomeContact, updateHomeDescription, updateHomeEmail, updateHomeFacebook, updateHomeFirstHeading, updateHomeLastSection, updateHomeLinkedin, updateHomeSecondHeading, updateHomeSkillsDescription, updateHomeSkillsHeader, updateHomeVideoSectionHeader, updateHomeWhatsapp, updateHomeYearsOfExperiyances, updateSkillHeadingWithNumber, updateSkillImage } from "@/funcs/create.server.func";
 import { getHomePageData } from "@/funcs/get.server.func";
+import Image from "next/image";
+import SkillImageUploader from "./ImageUPload";
 
 interface Skill {
   id: number;
@@ -11,52 +13,34 @@ interface Skill {
 }
 
 export default function About() {
-  const [firstHeader, setFirstHeader] = useState("");
-  const [secondHeader, setSecondHeader] = useState("");
-  const [description, setDescription] = useState("");
+  const [firstHeader, setFirstHeader] = useState<string>("");
+  const [secondHeader, setSecondHeader] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [complitedProjects,setProjects] = useState<string>("");
+  const [yearsofexpriyeans,setExperiyeans] = useState<string>("");
+  const [previewImage, setPreviewImage] = useState<string>("");
 
-  const [facebook, setFacebook] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
+  const [facebook, setFacebook] = useState<string>("");
+  const [linkedin, setLinkedin] = useState<string>("");
+  const [whatsapp, setWhatsapp] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [contact, setContact] = useState<string>("");
 
-  const [skillsHeader, setSkillsHeader] = useState("");
-  const [skillsAbout, setSkillsAbout] = useState("");
-  const [skills, setSkills] = useState<Skill[]>([]);
-  const [skillName, setSkillName] = useState("");
-
-  const addSkill = () => {
-    if (!skillName.trim()) return;
-    setSkills((prev) => [
-      ...prev,
-      { id: Date.now(), name: skillName, image: null },
-    ]);
-    setSkillName("");
-  };
-
-  const removeSkill = (id: number) => {
-    setSkills((prev) => prev.filter((s) => s.id !== id));
-  };
-
-  const handleSkillImage = (id: number, file: File | null) => {
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setSkills((prev) =>
-        prev.map((s) =>
-          s.id === id ? { ...s, image: reader.result as string } : s
-        )
-      );
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const [videoHeader, setVideoHeader] = useState("");
+  const [skillsHeader, setSkillsHeader] = useState<string>("");
+  const [skillsAbout, setSkillsAbout] = useState<string>("");
+  const [skill1Heading, setSkill1Heading] = useState<string>("");
+  const [skill2Heading, setSkill2Heading] = useState<string>("");
+  const [skill3Heading, setSkill3Heading] = useState<string>("");
+  const [skill1Image, setSkill1Image] = useState<string>("");
+  const [skill1ImageFile, setSkill1ImageFile] = useState<File>();
+  const [skill2Image, setSkill2Image] = useState<string>("");
+  const [skill3Image, setSkill3Image] = useState<string>("");
+  
+  const [videoHeader, setVideoHeader] = useState<string>("");
   const [videoFile, setVideoFile] = useState<File | null>(null);
 
-  const [lastHeader, setLastHeader] = useState("");
-  const [string, setString] = useState("");
+  const [lastHeader, setLastHeader] = useState<string>("");
+  const [string, setString] = useState<string>("");
   const [lastArray, setLastArray] = useState<string[]>([
     "this is the first",
     "this second",
@@ -74,13 +58,19 @@ export default function About() {
     setLastArray((prev) => prev.filter((_, i) => i !== index));
   };
 
+
   useEffect(()=>{
     getHomePageData()
     .then( ({HeroSection, links, videoSection, skills, lastSection}) => {
+
+        console.log(skills)
         
         setFirstHeader(HeroSection.firstHeader)
         setSecondHeader(HeroSection.secondHeader)
         setDescription(HeroSection.discription)
+        setExperiyeans(HeroSection.expriyeans)
+        setProjects(HeroSection.projects)
+        setPreviewImage(HeroSection.image)
 
         setFacebook(links.facebook)
         setLinkedin(links.linkedin)
@@ -90,15 +80,8 @@ export default function About() {
 
         setSkillsHeader(skills.title)
         setSkillsAbout(skills.description)
-
-        /*
-        {
-                div1: resuald.skill1,
-                div2: resuald.skill2,
-                div3: resuald.skill3,
-                div4: resuald.skill4
-            }
-        */
+        setSkill1Heading(skills.div1.title)
+        setSkill1Image(skills.div1.image)
 
         setVideoHeader(videoSection.title)
         // Main video also weating for hear
@@ -166,9 +149,45 @@ export default function About() {
                 >Update</button>
         </div>
 
+        {/* Experience Header */}
+        <div className="md:w-[40%] w-[90%] flex flex-col items-start bg-white justify-start p-2 rounded-sm shadow-md">
+            <small className="text-[#00111d] text-sm font-bold">
+            Experience:
+            </small>
+            <input
+            type="text"
+            value={yearsofexpriyeans}
+            onChange={(e) => setExperiyeans(e.target.value)}
+            placeholder="Second Header"
+            className="w-full h-auto p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
+            />
+            <button
+                onClick={()=>updateHomeYearsOfExperiyances(yearsofexpriyeans)} 
+                className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
+        </div>
+
+        {/* Complited Projects */}
+        <div className="md:w-[40%] w-[90%] flex flex-col items-start bg-white justify-start p-2 rounded-sm shadow-md">
+            <small className="text-[#00111d] text-sm font-bold">
+                Projects:
+            </small>
+            <input
+            type="text"
+            value={complitedProjects}
+            onChange={(e) => setProjects(e.target.value)}
+            placeholder="Total completed"
+            className="w-full h-auto p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
+            />
+            <button
+                onClick={()=>updateHomeComplitedProjects(complitedProjects)} 
+                className="text-[#323232] w-full h-full p-2 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
+        </div>
+
         {/* Image Uploader */}
-        <div className="md:w-[40%] w-[90%] h-auto flex flex-col items-start justify-start p-2 rounded-sm shadow-md">
-            <ImageUploader apiEndpoint="" />
+        <div className="md:w-[40%] w-[90%] h-auto flex flex-col items-start justify-start p-2 rounded-sm shadow-md bg-white">
+            <ImageUploader previewImage={previewImage} />
         </div>
 
         {/* Social Links */}
@@ -281,64 +300,30 @@ export default function About() {
                 >Update</button>
             </div>
 
-            {/* Skill add form */}
-            <div className="flex gap-2 w-full mt-2">
-            <input
-                type="text"
-                placeholder="Skill name"
-                value={skillName}
-                onChange={(e) => setSkillName(e.target.value)}
-                className="flex-1 p-2 border rounded-sm"
-            />
-            <button
-                onClick={addSkill}
-                className="bg-[#00111d] text-white px-4 py-2 text-sm rounded-sm"
-            >
-                Add
-            </button>
-            </div>
-
-            {/* Skill list */}
-            <div className="w-full mt-3 space-y-2">
-            {skills.map((skill) => (
-                <div
-                key={skill.id}
-                className="flex items-center justify-between border p-2 rounded-sm"
-                >
-                <div className="flex items-center gap-3">
-                    {/* Image Upload */}
-                    <label className="cursor-pointer">
-                    {skill.image ? (
-                        <img
-                        src={skill.image}
-                        alt={skill.name}
-                        className="w-12 h-12 object-cover rounded-full border"
-                        />
-                    ) : (
-                        <div className="w-12 h-12 flex items-center justify-center bg-gray-200 rounded-full text-xs text-gray-500">
-                        Upload
-                        </div>
-                    )}
-                    <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) =>
-                        handleSkillImage(skill.id, e.target.files?.[0] || null)
-                        }
-                    />
-                    </label>
-                    <span className="font-medium">{skill.name}</span>
-                </div>
+            {/* Skill */}
+            <div className="p-2 w-full rounded-md border">
+                <h3 className="text-sm border-b mb-1 pb-1">Skill Section 1</h3>
+                
+                <input
+                    type="text"
+                    value={skill1Heading}
+                    onChange={(e) => setSkill1Heading(e.target.value)}
+                    placeholder="Skill heading 1"
+                    className="w-full h-auto p-2 rounded-sm border border-[#00111d] mt-2"
+                />
                 <button
-                    onClick={() => removeSkill(skill.id)}
-                    className="text-red-500 hover:text-red-700"
-                >
-                    Delete
-                </button>
-                </div>
-            ))}
+                    onClick={()=>updateSkillHeadingWithNumber(skill1Heading,1)} 
+                    className="text-[#323232] w-full h-full p-1 border rounded-lg mt-2 active:scale-95 cursor-pointer duration-100"
+                >Update</button>
+                
+                <SkillImageUploader
+                    skillImage={skill1Image}
+                    skillNumber={1}
+                    width={300}
+                    height={300}
+                />
             </div>
+            
         </div>
 
         {/* Video Section */}
@@ -449,7 +434,6 @@ export default function About() {
                         placeholder="About Section description"
                         className="w-full max-h-[300px] min-h-[100px] p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
                     />
-                    <ImageUploader apiEndpoint="https://api.imgbb.com/1/upload?key=3d0f3f2e5d8c4d4e8d8c4d4e8d8c4d4e" />
                 </div>
             </div>
 
@@ -460,7 +444,6 @@ export default function About() {
                         placeholder="About Section description"
                         className="w-full max-h-[300px] min-h-[100px] p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
                     />
-                    <ImageUploader apiEndpoint="https://api.imgbb.com/1/upload?key=3d0f3f2e5d8c4d4e8d8c4d4e8d8c4d4e" />
                 </div>
             </div>
 
@@ -471,7 +454,6 @@ export default function About() {
                         placeholder="About Section description"
                         className="w-full max-h-[300px] min-h-[100px] p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
                     />
-                    <ImageUploader apiEndpoint="https://api.imgbb.com/1/upload?key=3d0f3f2e5d8c4d4e8d8c4d4e8d8c4d4e" />
                 </div>
             </div>
 
@@ -488,7 +470,6 @@ export default function About() {
                         placeholder="About Section description"
                         className="w-full max-h-[300px] min-h-[100px] p-2 rounded-sm border border-[#00111d] outline-none text-[#00111d] mt-2"
                     />
-                    <ImageUploader apiEndpoint="https://api.imgbb.com/1/upload?key=3d0f3f2e5d8c4d4e8d8c4d4e8d8c4d4e" />
                 </div>
             </div>
 
