@@ -25,11 +25,11 @@ export default function RootLayout({
       <body
         className={`${poppinsFonds.variable} ${poppinsFonds.variable} antialiased`}
       >
-        <Navbar />
+        {/* <Navbar /> */}
         <div>
           {children}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );

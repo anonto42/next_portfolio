@@ -3,18 +3,16 @@ import { updateHomeSectionImage } from "@/funcs/create.server.func";
 import Image from "next/image";
 import React, { useState } from "react";
 
-interface ImageUploaderProps {
-  width?: number;
-  height?: number;
-  previewImage: string
-}
-
 export default function ImageUploader({
   width = 300,
   height = 300,
   previewImage
-}: ImageUploaderProps) {
-  const [preview, setPreview] = useState<string | null>(previewImage);
+}: {
+  width?: number;
+  height?: number;
+  previewImage?: string;
+}) {
+  const [preview, setPreview] = useState<string | null>();
   const [loading, setLoading] = useState(false);
 
   // Handle file selection
@@ -25,7 +23,7 @@ export default function ImageUploader({
     // Create image element
     //@ts-ignore
     const img = new Image();
-    img.src = URL.createObjectURL(file);
+    img.src = URL.createObjectURL("file");
 
     img.onload = async () => {
         
@@ -95,11 +93,24 @@ export default function ImageUploader({
             priority
             placeholder="blur"
             alt="User profile picture"
-            src={previewImage}
+            src={"https://img.freepik.com/premium-photo/modern-car-white-background-studio_900706-23056.jpg"}
             blurDataURL="/images/Profile2.webp"
             className="object-cover" />
         </div>
       {/* )} */}
+
+    <a
+  href="https://img.freepik.com/premium-photo/modern-car-white-background-studio_900706-23056.jpg"
+  download
+  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow hover:bg-blue-700 transition duration-200"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
+  </svg>
+  Download Image
+</a>
+
+
 
       {loading && <p className="text-blue-500">Uploading...</p>}
     </div>
